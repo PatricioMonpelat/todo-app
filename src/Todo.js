@@ -10,13 +10,8 @@ function Todo(props) {
         <ListItemAvatar></ListItemAvatar>
         <ListItemText primary={props.todo.todo} secondary="Todo" />
       </ListItem>
-      <DeleteForeverIcon
-        onClick={() => {
-         deleteDoc(props.todo.id);
-        }}
-      >
-      ❌ Delete Me
-      </DeleteForeverIcon>
+      <DeleteForeverIcon onClick={() => {deleteDoc(props.todo.id);}}/>Delete Me
+    
     </List>
   );
 }
