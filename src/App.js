@@ -1,23 +1,55 @@
-import logo from './logo.svg';
-import './App.css';
+import Todo from "./Todo";
+import { Button, Input, InputLabel, FormControl } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import database from './firebase';
+import "./App.css";
+import { onSnapshot, collection, addDoc, FieldValue } from "firebase/firestore";
 
 function App() {
+  const [todos, setTodos] = useState([]);
+  const [input, setInput] = useState('');
+
+  // when apo loads we need to listen to the database and fetch new todos as they get added / removed
+  useEffect(()=>{
+    // this code executes when app.js loads
+    const q = collection(database,'todos');
+    onSnapshot(q, (querySnapshot) => {
+      setTodos(querySnapshot.docs.map(doc => doc.data().todo))
+    });
+  },[]);
+
+
+  const addTodo = (event) => {    // fires when you click button
+    event.preventDefault(); // will stop the reload of the page
+
+    addDoc(collection(database, "todos"), {
+      todo: input,
+      timestamp: FieldValue.serverTimestamp()
+    });
+
+    // setTodos([...todos, input]);
+    setInput(''); // clear up the input after clciking add todo button
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Hello Guys &#128511; </h1>
+      <form>
+        
+        <FormControl>
+          <InputLabel>✅ Write a To Do</InputLabel>
+          <Input value={input} onChange={(event) => setInput(event.target.value)}/>
+        </FormControl>
+        <Button disabled={!input} type="submit" onClick={addTodo} variant="contained" color="secondary">Add ToDo</Button>
+        
+      </form>
+
+      <ul>
+        {todos.map(todo => (
+          // <li>{todo}</li>
+           <Todo text={todo}/>
+        ))}
+      </ul>
     </div>
   );
 }
