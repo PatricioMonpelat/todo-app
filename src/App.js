@@ -14,8 +14,10 @@ function App() {
     // this code executes when app.js loads
     const q = collection(db, "todos");
     onSnapshot(q, (querySnapshot) => {
-      setTodos(querySnapshot.docs.map(doc => ({id: doc.id , todo: doc.data().todo})))
-    })
+      setTodos(
+        querySnapshot.docs.map((doc) => ({ id: doc.id, todo: doc.data().todo }))
+      );
+    });
   }, []);
 
   const addTodo = (event) => {
@@ -31,7 +33,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className='App'>
       <h1>🧟‍♂️ Hello Guys 🧟‍♀️</h1>
       <form>
         <FormControl>
@@ -43,10 +45,10 @@ function App() {
         </FormControl>
         <Button
           disabled={!input}
-          type="submit"
+          type='submit'
           onClick={addTodo}
-          variant="contained"
-          color="secondary"
+          variant='contained'
+          color='secondary'
         >
           Add ToDo
         </Button>
@@ -54,7 +56,7 @@ function App() {
 
       <ul>
         {todos.map((todo) => (
-          <Todo todo={todo}/>
+          <Todo todo={todo} />
         ))}
       </ul>
     </div>
