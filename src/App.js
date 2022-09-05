@@ -3,7 +3,7 @@ import { Button, Input, InputLabel, FormControl } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import db from "./firebase";
 import "./App.css";
-import { onSnapshot, collection, addDoc, FieldValue } from "firebase/firestore";
+import { onSnapshot, collection, addDoc, FieldValue, serverTimestamp } from "firebase/firestore";
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -26,7 +26,7 @@ function App() {
 
     addDoc(collection(db, "todos"), {
       todo: input,
-      timestamp: FieldValue.serverTimestamp(),
+      timestamp: serverTimestamp(),
     });
 
     setInput(""); // clear up the input after clciking add todo button
