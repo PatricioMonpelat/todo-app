@@ -6,10 +6,10 @@ import { deleteDoc} from "firebase/firestore";
 
 function Todo(props) {
   return (
-    <List>
+    <List className="todo__list">
       <ListItem>
         <ListItemAvatar></ListItemAvatar>
-        <ListItemText primary={props.todo.todo} secondary="Todo" />
+        <ListItemText primary={props.todo.todo} secondary="Dummy deadline" />
       </ListItem>
       <DeleteForeverIcon onClick={ event => {
         deleteDoc(db, 'todos', props.todo.id);
