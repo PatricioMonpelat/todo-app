@@ -1,7 +1,8 @@
 import React from "react";
 import {  List,  ListItem,  ListItemText,  ListItemAvatar} from "@mui/material";
-import { deleteDoc } from "firebase/firestore";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import db from "./firebase";
+import { deleteDoc} from "firebase/firestore";
 
 function Todo(props) {
   return (
@@ -10,7 +11,10 @@ function Todo(props) {
         <ListItemAvatar></ListItemAvatar>
         <ListItemText primary={props.todo.todo} secondary="Todo" />
       </ListItem>
-      <DeleteForeverIcon onClick={() => {deleteDoc(props.todo.id);}}/>Delete Me
+      <DeleteForeverIcon onClick={ event => {
+        deleteDoc(db, 'todos', props.todo.id);
+        // db.collection('todos').doc(props.todo.id).delete;
+      }}/>
     
     </List>
   );
