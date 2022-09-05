@@ -3,7 +3,7 @@ import { Button, Input, InputLabel, FormControl } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import db from "./firebase";
 import "./App.css";
-import { onSnapshot, collection, addDoc, FieldValue, serverTimestamp } from "firebase/firestore";
+import { onSnapshot, collection, addDoc, serverTimestamp, orderBy } from "firebase/firestore";
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -13,7 +13,7 @@ function App() {
   useEffect(() => {
     // this code executes when app.js loads
     const q = collection(db, "todos");
-    onSnapshot(q, (querySnapshot) => {
+    onSnapshot(q, orderBy('timestamp', 'desc'), (querySnapshot) => {
       setTodos(
         querySnapshot.docs.map((doc) => ({ id: doc.id, todo: doc.data().todo }))
       );
@@ -56,7 +56,7 @@ function App() {
 
       <ul>
         {todos.map((todo) => (
-          <Todo todo={todo} />
+          <Todo todo={todo}  />
         ))}
       </ul>
     </div>
