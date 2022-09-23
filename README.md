@@ -9,6 +9,8 @@ Server Link:  https://todo-app-d28bb.web.app/
 
 ### `npm install`
 
+### `npm start`
+
 ## Available Scripts
 
     "deploy": "npm run build & firebase deploy"
