@@ -18,7 +18,7 @@ function Todo(props) {
     <List className="todo__list">
       <ListItem>
         <ListItemAvatar></ListItemAvatar>
-        <ListItemText primary={props.todo.todo} secondary="Dummy deadline" />
+        <ListItemText primary={props.todo.todo} secondary="Dummy deadline" className="todo__text"/>
       </ListItem>
       <DeleteForeverIcon onClick={deleteTodo}/>
     
