@@ -34,7 +34,7 @@ function App() {
 
   return (
     <div className='App'>
-      <h1>🧟‍♂️ Hello Guys 🧟‍♀️</h1>
+      <h1>🧟‍♂️ Hello 🧟‍♀️</h1>
       <form>
         <FormControl>
           <InputLabel>✅ Write a To Do</InputLabel>
